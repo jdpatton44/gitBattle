@@ -1,5 +1,5 @@
-const id = 'YOUR_CLIENT_ID';
-const sec = 'YOUR_SECRET_ID';
+const id = '85ad4f814556eb5ed8ed';
+const sec = 'a0bd97eb4ee34db33a0de28bb4384ce9ba367611';
 const params = ''; // `?client_id=${id}&client_secret=${sec}`;
 
 function getErrorMsg(message, username) {
@@ -15,7 +15,7 @@ function getProfile(username) {
     .then(res => res.json())
     .then(profile => {
       if (profile.message) {
-        throw new Error(getErrorMsg(profile.message, username));
+        throw new Error(getErrorMsg(`${profile.message}username`, username));
       }
 
       return profile;
@@ -23,11 +23,11 @@ function getProfile(username) {
 }
 
 function getRepos(username) {
-  return fetch(`https://api.github.com/users/${username}/repos${params}&per_page=100`)
+  return fetch(`https://api.github.com/users/${username}/repos${params}`)
     .then(res => res.json())
     .then(repos => {
       if (repos.message) {
-        throw new Error(getErrorMsg(repos.message, username));
+        throw new Error(getErrorMsg(`${repos.message}repos`, username));
       }
 
       return repos;

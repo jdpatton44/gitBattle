@@ -1,16 +1,16 @@
 import React from 'react';
-import { FaUserFriends, FaTimesCircle, FaFighterJet, FaTrophy } from 'react-icons/fa';
+import { FaUserFriends, FaFighterJet, FaTrophy, FaTimesCircle } from 'react-icons/fa';
 import PropTypes from 'prop-types';
 import Results from './Results';
 
 function Instructions() {
   return (
-    <div>
+    <div className="instructions-container">
       <h1 className="center-text header-lg">Instructions</h1>
       <ol className="container-sm grid center-text battle-instructions">
         <li>
           <h3 className="header-sm">Enter two Github users</h3>
-          <FaUserFriends className="bg-light" color="rgb(295,191, 116)" size={140} />
+          <FaUserFriends className="bg-light" color="rgb(255, 191, 116)" size={140} />
         </li>
         <li>
           <h3 className="header-sm">Battle</h3>
@@ -18,7 +18,7 @@ function Instructions() {
         </li>
         <li>
           <h3 className="header-sm">See the winners</h3>
-          <FaTrophy className="bg-light" color="rgb(255,251,0)" size={140} />
+          <FaTrophy className="bg-light" color="rgb(255, 215, 0)" size={140} />
         </li>
       </ol>
     </div>
@@ -39,6 +39,7 @@ class PlayerInput extends React.Component {
 
   handleSubmit(event) {
     event.preventDefault();
+
     this.props.onSubmit(this.state.username);
   }
 
@@ -64,7 +65,7 @@ class PlayerInput extends React.Component {
             value={this.state.username}
             onChange={this.handleChange}
           />
-          <button className="btn btn-dark" type="submit" disable={!this.state.username}>
+          <button className="btn dark-btn" type="submit" disabled={!this.state.username}>
             Submit
           </button>
         </div>
@@ -86,7 +87,7 @@ function PlayerPreview({ username, onReset, label }) {
         <div className="player-info">
           <img
             className="avatar-small"
-            src={`https://github.com/${username}.png?size200`}
+            src={`https://github.com/${username}.png?size=200`}
             alt={`Avatar for ${username}`}
           />
           <a href={`https://github.com/${username}`} className="link">
@@ -94,7 +95,7 @@ function PlayerPreview({ username, onReset, label }) {
           </a>
         </div>
         <button className="btn-clear flex-center" onClick={onReset}>
-          <FaTimesCircle color="rgb(194,57,42)" size={26} />
+          <FaTimesCircle color="rgb(194, 57, 42)" size={26} />
         </button>
       </div>
     </div>
@@ -136,13 +137,14 @@ export default class Battle extends React.Component {
   render() {
     const { playerOne, playerTwo, battle } = this.state;
 
-    if (battle) {
+    if (battle === true) {
       return <Results playerOne={playerOne} playerTwo={playerTwo} />;
     }
 
     return (
       <React.Fragment>
         <Instructions />
+
         <div className="players-container">
           <h1 className="center-text header-lg">Players</h1>
           <div className="row space-around">
@@ -160,7 +162,7 @@ export default class Battle extends React.Component {
           </div>
 
           {playerOne && playerTwo && (
-            <button className="btn dark-btn btn-space" onClick={this.setState({ battle: true })}>
+            <button className="btn dark-btn btn-space" onClick={() => this.setState({ battle: true })}>
               Battle
             </button>
           )}
