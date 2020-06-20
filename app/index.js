@@ -3,10 +3,11 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import Popular from './components/Popular';
 import Battle from './components/Battle';
-import { ThemProvider } from './contexts/theme';
+import { ThemeProvider } from './contexts/theme';
+import Nav from './components/Nav';
 
 class App extends React.Component {
-  constructor() {
+  constructor(props) {
     super(props);
 
     this.state = {
@@ -21,11 +22,14 @@ class App extends React.Component {
 
   render() {
     return (
-      <ThemProvider value={this.state}>
-        <div className="container">
-          <Battle />
+      <ThemeProvider value={this.state}>
+        <div className={this.state.theme}>
+          <div className="container">
+            <Nav />
+            <Popular />
+          </div>
         </div>
-      </ThemProvider>
+      </ThemeProvider>
     );
   }
 }
