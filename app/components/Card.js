@@ -5,7 +5,7 @@ import { ThemeConsumer } from '../contexts/theme';
 export default function Card({ header, subheader, avatar, name, href, children }) {
   return (
     <ThemeConsumer>
-      {({ theme }) => (
+      {theme => (
         <div className={`bg-${theme} card`}>
           <h4 className="header-lg center-text">{header}</h4>
           <img className="avatar" src={avatar} alt={`Avatar for ${name}`} />
