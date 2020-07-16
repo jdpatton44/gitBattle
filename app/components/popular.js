@@ -76,14 +76,14 @@ ReposGrid.Proptypes = {
 function popularReducer(state, action) {
   if (action.type === 'success') {
     return {
-      state,
+      ...state,
       [action.selectedLanguage]: action.repos,
       error: null,
     };
   }
   if (action === 'error') {
     return {
-      state,
+      ...state,
       error: action.error.message,
     };
   }
@@ -103,7 +103,7 @@ export default function Popular() {
 
       fetchPopularRepos(selectedLanguage)
         .then(repos => dispatch({ type: 'success', selectedLanguage, repos }))
-        .catch(error => dispatch({ type: error, error }));
+        .catch(error => dispatch({ type: 'error', error }));
     }
   }, [fetchedLanguages, selectedLanguage]);
 
